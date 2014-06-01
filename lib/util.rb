@@ -1,11 +1,12 @@
 require "httparty"
+require "nokogiri"
+require "json"
 
 module OSMThreeJS
   class Util
     attr_accessor :location
     OSM2WORLD_PATH = "~/osm2world/osm2world.sh"
     DOOB_CONVERTER_PATH = "~/mrdoob/convert_obj_three.py"
-    ROHIT_DAI_PATH = "./temp/main.sh"
     BBOX_MARGIN = 0.005
 
     def location=(query)
@@ -63,7 +64,24 @@ module OSMThreeJS
 
     def generate_json_data(loc = nil)
       @location ||= loc
-      `cd temp && ./main.sh #{@location}.osm`
+      return if File.exists?("#{json_data_file}")
+
+      obj = File.read("#{obj_file}")
+      osm = Nokogiri::HTML(File.read("#{osm_file}"))
+      info = []
+      lat = obj.match(/lat\s\d+\.\d+/)[0].split(" ").last
+      lon = obj.match(/lon\s\d+\.\d+/)[0].split(" ").last
+
+      info.push({"lat" => lat, "lon" => lon})
+
+      osm.css("node>tag[k=name]").each do |tag|
+        name = tag.attributes["v"].value
+        p = tag.parent
+        lat = p.attributes["lat"].value
+        lon = p.attributes["lon"].value
+        info.push({"name" => name, "lat" => lat, "lon" => lon})
+      end
+      File.open("#{json_data_file}", "w") { |io| io.write(info.to_json) }
     end
 
     private
@@ -86,6 +104,10 @@ module OSMThreeJS
 
     def json_file
       "public/#{@location}.json"
+    end
+
+    def json_data_file
+      "public/#{@location}_data.json"
     end
   end
 end

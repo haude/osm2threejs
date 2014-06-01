@@ -2,21 +2,16 @@
 
 function displayAllLabels(location) {
     var filename = "/" + location + "_data.json";
-    console.log(filename);
     var xhr = new XMLHttpRequest();
       xhr.addEventListener('load', function(e) {
         var data = JSON.parse(e.target.responseText);
 
         //get scale
-
         getScale(data[0].lon, data[0].lat); // 85.33330000000001, 27.648149999999987);
-        console.log(data[0].lon, data[0].lat);
         window.data = data;
-        console.log(data);
         for (var i=1;i<data.length;i++) {
             x=posX(data[i].lon);
             y=posY(data[i].lat);
-            console.log(data[i].lat, data[i].lon, x, y);
             displayLabel(data[i].name,x,-y);
         }
       }, true);

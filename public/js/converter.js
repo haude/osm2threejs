@@ -47,14 +47,10 @@ function getScale( lon,lat){
 	// convert from degrees to radians
 	var latRad = lat*(Math.PI/180.0);
 	
-	//console.log(latRad);
-
 	//EARTH_CIRCUMFERENCE = 40075016.686
 	scaleFactor = 40075016.686 * Math.cos(latRad);
 
 	originY = latToY(lat) * scaleFactor;
 	originX = lonToX(lon) * scaleFactor;
-
-	console.log(originX, originY, scaleFactor);
 
 }
