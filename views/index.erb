@@ -1,0 +1,31 @@
+<script type="text/javascript">
+  $(function() {
+    function get_map_data(q) {
+      $.get( "/get_map?query=" + q, function(data) {
+        render_map(q.split(" ").join("_"));
+      });
+    }
+
+    $("#query").keyup(function(event) {
+      if(event.which === 13) { // enter key
+        $(".viewport").html("");
+        var q = $("#query").val();
+        if(q.length == 0) return;
+        get_map_data(q);
+      }
+    });
+  });
+</script>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <h3>Get 3D map of:</h3>
+      <input type="text" name="query" id="query" placeholder="Get Map Data">
+    </div>
+    <div class="col-md-9" id="output">
+      <div id="loader"><img src="/img/loading.gif"/></div>
+      <div class="viewport"></div>
+    </div>
+  </div>
+</div>

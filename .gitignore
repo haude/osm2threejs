@@ -1,0 +1,5 @@
+.DS_Store
+temp
+temp/*
+*.json
+*.old
