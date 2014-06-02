@@ -1,4 +1,6 @@
 .DS_Store
-temp/*
+*.osm
+*.obj
+*.obj.mtl
 *.json
 *.old
