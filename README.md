@@ -15,7 +15,7 @@ The developers can use this engine for making own 3D maps for game, gps etc.
 ##### Requirements
 - Ruby
 - Python 3
-- Bash Shell, which GNU sed (sorry mac guys)
+- Bash Shell, with "GNU sed" (sorry mac guys)
 - web-browser
 
 ### Backstory
