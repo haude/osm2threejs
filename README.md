@@ -1,7 +1,7 @@
 # osm2threejs
 ## Open Street Map to threejs
 
-An API to converts open street 2D map into 3D and render using threejs
+An API to convert open street 2D map into 3D and render using threejs
 
 #### About
 
