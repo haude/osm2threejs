@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY Gemfile /app
 COPY Gemfile.lock /app
-RUN bundle install
-COPY . /app
-CMD ['/app/bootstrap.sh']
+ENV BUNDLE_PATH /bundle_path
+
+ADD . /app
+
+CMD ["shotgun","--server=webrick","--port=4567","--host=0.0.0.0", "--env=production","web.rb"]

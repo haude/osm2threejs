@@ -1,13 +1,21 @@
 require "sinatra/base"
+require "sinatra"
 require "sinatra/reloader"
 require "json"
 require "pry"
 load "./lib/util.rb"
 
+set :bind, '0.0.0.0'
+set :port, 4567
+
 module OSMThreeJS
   class Web < Sinatra::Base
     get "/" do
       erb :index
+    end
+
+    get '/hello' do
+      puts 'hello there'
     end
 
     get "/get_map" do
