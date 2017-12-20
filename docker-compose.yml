@@ -1,0 +1,11 @@
+version: "3.2"
+
+services:
+  app:
+    build: .
+    command: ./start.sh
+    ports:
+      - 4567:4567
+    volumes:
+      - .:/app
+      - /opt/thapakazi/share/rubygems:/bundle_path
