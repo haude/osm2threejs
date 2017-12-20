@@ -5,11 +5,10 @@ require "json"
 require "pry"
 load "./lib/util.rb"
 
-set :bind, '0.0.0.0'
-set :port, 4567
 
 module OSMThreeJS
   class Web < Sinatra::Base
+    set :bind, '0.0.0.0'
     get "/" do
       erb :index
     end
